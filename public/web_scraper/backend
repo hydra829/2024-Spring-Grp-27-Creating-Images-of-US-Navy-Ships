@@ -1,0 +1,33 @@
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+const app = express();
+app.use(cors());
+
+app.get('/search', async (req, res) => {
+    const keyword = req.query.keyword;
+    const url = `https://www.google.com/search?gl=us&q=${keyword}&tbm=isch`;
+
+    try {
+        const { data } = await axios.get(url);
+        const $ = cheerio.load(data);
+        const results = [];
+
+        $('table.RntSmf').each((i, elem) => {
+            const imgSrc = $(elem).find('img').attr('src');
+            results.push(imgSrc);
+        });
+
+        res.json(results);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error occurred');
+    }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

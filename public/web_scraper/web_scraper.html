@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Search</title>
+</head>
+<body>
+    <input type="text" id="searchBar" placeholder="Search for images...">
+    <button onclick="searchImages()">Search</button>
+    <div id="results"></div>
+
+    <script>
+        async function searchImages() {
+            const keyword = document.getElementById('searchBar').value;
+            const response = await fetch(`http://localhost:3000/search?keyword=${keyword}`);
+            const images = await response.json();
+
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+            images.forEach(imgSrc => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                resultsContainer.appendChild(img);
+            });
+        }
+    </script>
+</body>
+</html>
