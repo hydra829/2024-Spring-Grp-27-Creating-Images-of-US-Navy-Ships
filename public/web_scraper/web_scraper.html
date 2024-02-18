@@ -4,21 +4,34 @@
     <title>Image Search</title>
 </head>
 <body>
+    <!-- Input field for search queries -->
     <input type="text" id="searchBar" placeholder="Search for images...">
+    <!-- Button that triggers image search -->
     <button onclick="searchImages()">Search</button>
+    <!-- Container for displaying search results -->
     <div id="results"></div>
 
     <script>
+        // Define an asynchronous function to search for images
         async function searchImages() {
+            // Retrieve the search keyword from the input field
             const keyword = document.getElementById('searchBar').value;
+            // Make a request to the backend search endpoint with the keyword
             const response = await fetch(`http://localhost:3000/search?keyword=${keyword}`);
+            // Parse the JSON response to get the array of image sources
             const images = await response.json();
 
+            // Get the results container
             const resultsContainer = document.getElementById('results');
+            // Clear any previous results
             resultsContainer.innerHTML = '';
+            // Iterate over each image source
             images.forEach(imgSrc => {
+                // Create a new img element
                 const img = document.createElement('img');
+                // Set the source of the img element to the image source URL
                 img.src = imgSrc;
+                // Append the img element to the results container
                 resultsContainer.appendChild(img);
             });
         }

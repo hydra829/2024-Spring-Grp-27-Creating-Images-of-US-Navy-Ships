@@ -1,33 +1,52 @@
+// Require necessary modules
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+// Initialize an Express application
 const app = express();
+
+// Use CORS middleware to allow cross-origin requests
 app.use(cors());
 
+// Define a GET route for image search
 app.get('/search', async (req, res) => {
+    // Extract the search keyword from the query parameters
     const keyword = req.query.keyword;
+    // Construct the Google search URL for images
     const url = `https://www.google.com/search?gl=us&q=${keyword}&tbm=isch`;
 
     try {
+        // Use axios to fetch the content of the Google search results page
         const { data } = await axios.get(url);
+        // Load the HTML content into cheerio for parsing
         const $ = cheerio.load(data);
+        // Initialize an empty array to hold the results
         const results = [];
 
+        // Select each image result and extract the image source URL
         $('table.RntSmf').each((i, elem) => {
+            // Find the image tag within the current element and get its src attribute
             const imgSrc = $(elem).find('img').attr('src');
+            // Add the image source URL to the results array
             results.push(imgSrc);
         });
 
+        // Send the results array as a JSON response
         res.json(results);
     } catch (err) {
+        // Log any errors that occur during the fetch or parsing process
         console.error(err);
+        // Send a 500 Internal Server Error response if an error occurs
         res.status(500).send('Error occurred');
     }
 });
 
+// Define the port to listen on, using the PORT environment variable or default to 3000
 const PORT = process.env.PORT || 3000;
+// Start the server and log the port it's running on
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
