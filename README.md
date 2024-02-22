@@ -84,19 +84,19 @@ This combination of backend and frontend allows users to search for images via a
 <br>
 Our web server is built using Node.js, and it serves as the backend for our collaborative application. The server provides RESTful API endpoints for various functionalities and interacts with the project's database.
 
-##Getting Started
-##Prerequisites
+## Getting Started
+## PreReq
 *Ensure that you have the following prerequisites installed on your system:Node.js & npm (Node.js package manager)
-##Project Structure
+## Project Structure
 Our project follows a structured layout. Key directories include:
 src: Contains the source code of the Node.js server.
 public: Houses static assets (HTML, CSS, client-side JavaScript).
 config: Configuration files for the server.
 
-##Configuration
+## Configuration
 Configure the server by editing the files in the config directory. Update the database connection details, API keys, and any other relevant settings.
 
-##Running the Server
+## Running The Server
 Start the server using the following command:
 npm server.js
 The server will be accessible at http://localhost:3000.
