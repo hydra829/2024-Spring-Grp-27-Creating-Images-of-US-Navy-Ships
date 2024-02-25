@@ -2,12 +2,83 @@
 <html>
 <head>
     <title>Image Search</title>
+    <style>
+        #results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        img {
+            width: 200px; /* Adjust the width of the images as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin: 10px; /* Add space between images */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            transition: transform 0.3s ease; /* Smooth transition for image scaling */
+        }
+
+        .selected {
+            border: 2px solid white; /* Highlight selected images */
+        }
+
+        .expanded {
+            width: 500px; /* Adjust the width of the expanded image */
+            height: auto; /* Maintain aspect ratio */
+            z-index: 9999; /* Ensure it appears on top of other elements */
+        }
+    </style>
+<style>
+        #results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        img {
+            width: 200px; /* Adjust the width of the images as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin: 10px; /* Add space between images */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            transition: transform 0.3s ease; /* Smooth transition for image scaling */
+        }
+
+        .selected {
+            border: 2px solid white; /* Highlight selected images */
+        }
+
+        .expanded {
+            width: 500px; /* Adjust the width of the expanded image */
+            height: auto; /* Maintain aspect ratio */
+            z-index: 9999; /* Ensure it appears on top of other elements */
+
+        }
+    </style>
+    <style>
+        .edit-button {
+            margin-left: 10px; /* Add space between search button and edit button */
+            padding: 8px 16px; /* Adjust padding as needed */
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Text color */
+            border: none; /* Remove border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+    
+        .edit-button:hover {
+            background-color: #0056b3; / Darker background color on hover */
+            }
+    </style>
 </head>
 <body>
+    
     <!-- Input field for search queries -->
     <input type="text" id="searchBar" placeholder="Search for images...">
     <!-- Button that triggers image search -->
     <button onclick="searchImages()">Search</button>
+    <!-- Edit button with link to edit.html -->
+    <a href="edit.html" class="edit-button">Edit</a> 
     <!-- Container for displaying search results -->
     <div id="results"></div>
 
