@@ -1,0 +1,16 @@
+body {
+    font-family: Georgia, "Times New Roman",
+          Times, serif;
+    color: navy;
+    background-color: lightblue}
+    h1 {
+        font-size: 40px;
+      }
+      
+    p {
+        font-size: 30px;
+      }
+      
+    div {
+        font-size: 20px;
+    }
