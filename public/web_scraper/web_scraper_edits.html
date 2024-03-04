@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Search</title>
+    <style>
+        
+        body {
+            background-color: #031f3a; /* Set the background color of the entire website to navy blue */
+            color: #fff; /* Set text color to white */
+            font-family: Arial, sans-serif; /* Specify font family */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+        #title {
+            font-family: Arial, sans-serif; /* Specify font family */
+            margin-left: 10px; /* Add space between logo and title */
+            color: #fff; /* Blue color for the title */
+            font-size: 50px; /* Adjust font size as needed */
+        }
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #12426a; /* Set the background color of the header to light blue */
+        }
+        #searchBar {
+            background-color: #fff; /* Set background color to white */
+            color: #333; /* Set text color to dark gray */
+            border: 1px solid #ccc; /* Add a light gray border */
+            padding: 8px; /* Adjust padding as needed */
+            border-radius: 4px; /* Rounded corners */
+            width: 300px; /* Adjust width as needed */
+            margin-right: 10px; /* Add space between search bar and search button */
+        }
+    
+        #edit-button {
+            padding: 8px 16px; /* Adjust padding as needed */
+            background-color: #fff; /* Set background color to white */
+            color: #12426a; /* Set text color to navy blue */
+            border: 1px solid #12426a; /* Add border with navy blue color */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Change cursor to pointer on hover */
+        }
+
+        #logo {
+            width: 100px; /* Adjust the width of the logo as needed */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 8px; /* Rounded corners for the logo */
+        }
+
+        #navigation {
+            display: flex;
+        }
+
+        #navigation a {
+            text-decoration: none;
+            color: #fff; /* Text color for navigation links */
+            padding: 10px 20px; /* Adjust padding as needed */
+            margin-left: 10px; /* Add space between navigation links */
+            border-radius: 4px; /* Rounded corners */
+            background-color: #87cefa; /* Background color for navigation links (light blue) */
+        }
+
+        #navigation a:hover {
+            background-color: #6495ed; /* Darker background color on hover */
+        }
+
+        #results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <header id="header">
+        <img id="logo" src="navy logo.png" alt="Logo">
+        <div id="logo-container">
+            <h1 id="title">Blue Horizon Defense</h1>
+        </div>
+        <nav id="navigation">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <!-- Add more navigation links as needed -->
+        </nav>
+    </header>
+
+    <input type="text" id="searchBar" placeholder="Search for images...">
+    <button onclick="searchImages()">Search</button>
+    <a href="edit.html" class="edit-button">Edit</a> <!-- Edit button with link to edit.html -->
+    <div id="results"></div>
+
+    <script>
+        async function searchImages() {
+            const keyword = document.getElementById('searchBar').value;
+            const response = await fetch(`http://localhost:3000/search?keyword=${keyword}`);
+            const images = await response.json();
+
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+            images.forEach(imgSrc => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                resultsContainer.appendChild(img);
+            });
+        }
+    </script>
+</body>
+</html>

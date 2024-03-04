@@ -1,0 +1,25 @@
+<style>
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+img {
+    width: 200px; /* Adjust the width of the images as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin: 10px; /* Add space between images */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: transform 0.3s ease; /* Smooth transition for image scaling */
+}
+
+.selected {
+    border: 2px solid white; /* Highlight selected images */
+}
+
+.expanded {
+    width: 500px; /* Adjust the width of the expanded image */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 9999; /* Ensure it appears on top of other elements */
+}
