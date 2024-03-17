@@ -14,6 +14,9 @@ app.use(cors());
 app.get('/search', async (req, res) => {
     // Extract the search keyword from the query parameters
     const keyword = req.query.keyword;
+    // Extract the limit on the number of images to scrape, defaulting to 10 if not specified
+    const limit = parseInt(req.query.limit, 10) || 10;
+
     // Construct the Google search URL for images
     const url = `https://www.google.com/search?gl=us&q=${keyword}&tbm=isch`;
 
@@ -25,12 +28,17 @@ app.get('/search', async (req, res) => {
         // Initialize an empty array to hold the results
         const results = [];
 
-        // Select each image result and extract the image source URL
+        // Select each image result and extract the image source URL, respecting the limit
         $('table.RntSmf').each((i, elem) => {
+            // Stop the loop if we have reached the desired number of images
+            if (i >= limit) return false;
+
             // Find the image tag within the current element and get its src attribute
             const imgSrc = $(elem).find('img').attr('src');
-            // Add the image source URL to the results array
-            results.push(imgSrc);
+            // Add the image source URL to the results array if it exists
+            if (imgSrc) {
+                results.push(imgSrc);
+            }
         });
 
         // Send the results array as a JSON response
